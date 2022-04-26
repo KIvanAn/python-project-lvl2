@@ -65,7 +65,7 @@ def generate_diff(file1, file2):
     """
     file1_data = get_data(file1)
     file2_data = get_data(file2)
-    sorted_tuple = sorted((file1_data | file2_data).items(), key=get_key)
+    sorted_tuple = sorted({**file1_data, **file2_data}.items(), key=get_key)
     new_data = {}
     for key in dict(sorted_tuple):
         if key in file1_data:
