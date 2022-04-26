@@ -18,3 +18,5 @@ lint:
 
 test:
 	poetry run pytest --cov=gendiff
+
+.PHONY: test
