@@ -20,7 +20,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install --user poetry
         make install
-        make test
-    - uses: paambaati/codeclimate-action@v2.2.4
+    - uses: paambaati/codeclimate-action@v2.7.4
       env:
-        CC_TEST_REPORTER_ID: 8fe525571524ba0efd3ea39ce109fe5b36566625b91de5e6f0fb041cc6c1e963
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+          coverageCommand: make test
+          debug: true
