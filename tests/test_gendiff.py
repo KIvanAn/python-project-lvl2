@@ -8,3 +8,5 @@ def test_generate_diff():
         result_str = data_str.read()
 
     assert generate_diff('file1.json', 'file2.json') == result_str
+    assert generate_diff('file1.yaml', 'file2.yaml') == result_str
+    assert generate_diff('file1.yml', 'file2.yml') == result_str

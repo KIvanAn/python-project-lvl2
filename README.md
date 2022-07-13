@@ -9,3 +9,4 @@
 
 ### Example work programm:
 - https://asciinema.org/a/afwv8wGTOS4GPLILcZyXUxB2n
+- https://asciinema.org/a/tqbDkLKSCNcoUKuEODAM47LS9

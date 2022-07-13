@@ -2,7 +2,8 @@
 """Gendiff main script."""
 import argparse
 import json
-from pathlib import Path
+
+from gendiff.parser import parser
 
 
 def dict_to_str(dictionary):
@@ -35,23 +36,6 @@ def get_key(key):
     return key[0]
 
 
-def get_data(file_path):
-    """
-    Get data function.
-
-    Args:
-        file_path: path to file
-
-    Returns:
-        dact
-    """
-    get_path = Path('gendiff/fixtures', Path(file_path).name).resolve()
-    with open(get_path) as data_file1:
-        file_data = json.load(data_file1)
-
-    return file_data
-
-
 def generate_diff(file1, file2):
     """
     Check different function.
@@ -63,8 +47,8 @@ def generate_diff(file1, file2):
     Returns:
         str
     """
-    file1_data = get_data(file1)
-    file2_data = get_data(file2)
+    file1_data = parser(file1)
+    file2_data = parser(file2)
     sorted_tuple = sorted({**file1_data, **file2_data}.items(), key=get_key)
     new_data = {}
     for key in dict(sorted_tuple):
@@ -85,19 +69,19 @@ def generate_diff(file1, file2):
 
 def gendiff():
     """Gendiff function."""
-    parser = argparse.ArgumentParser(
+    parser_args = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.',
     )
-    parser.add_argument(
+    parser_args.add_argument(
         '-f',
         '--format',
         metavar='FORMAT',
         help='set format of output',
     )
-    parser.add_argument('first_file', type=str)
-    parser.add_argument('second_file', type=str)
+    parser_args.add_argument('first_file', type=str)
+    parser_args.add_argument('second_file', type=str)
 
-    args = parser.parse_args()
+    args = parser_args.parse_args()
     print(generate_diff(args.first_file, args.second_file))
 
 
